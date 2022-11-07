@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [2.7, 3.5, 3.6, 3.7, 3.8, 3.9, '3.10', 3.11-dev, pypy2.7, pypy3.9]
+        python-version: ["3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11-dev", "pypy-3.7", "pypy-3.8", "pypy3.9"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -27,13 +27,10 @@ jobs:
         pycodestyle
     - name: Tests
       run: pytest
-    - name: Remove gmpy on 2.7
-      if: matrix.python-version == 2.7
-      run: pip uninstall -y gmpy2
     - name: Run coverage tests & upload results
       env:
         PYTEST_ADDOPTS: --cov mpmath
-      if: matrix.python-version == 2.7 || matrix.python-version == 3.6
+      if: matrix.python-version == 3.5 || matrix.python-version == 3.10
       run: |
         pytest
         codecov --required
