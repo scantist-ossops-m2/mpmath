@@ -35,6 +35,7 @@ jobs:
       if: matrix.python-version == 2.7 || matrix.python-version == 3.6
       run: |
         pytest
+        pytest --doctest-modules mpmath
         codecov --required
     - name: Building docs
       run: |
