@@ -2,6 +2,7 @@ name: test
 on: [push, pull_request]
 jobs:
   build:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     strategy:
       matrix:
